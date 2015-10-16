@@ -59,8 +59,28 @@ What's your guess?"
       return you_won_message
     end
 
-    
+    # 'RRGB' has 3 of the correct elements with 2 in the correct positions
+    # You've taken 1 guess
+    in_correct_position = 0
+    correct_element = 0
 
+    guess.chars.each_with_index do |i, char|
+      if char == @solution[i]
+        in_correct_position += 1
+      end
+    end
+
+    solution = @solution
+    guess.chars.each do |char|
+      if solution.any?(char)
+        correct_elememt += 1
+      #   need to account for multiples
+      end
+    end
+
+    guess_message = "'#{guess.upcase}' has #{correct_element} of the correct elements with #{in_correct_position} in the correct positions"
+
+    reutnr guess_message
   end
 
   def generate_sequence(this_many)
