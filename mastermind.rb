@@ -53,8 +53,14 @@ What's your guess?"
     validation = ValidateGuess.new(guess)
     return validation.message unless validation.valid?
 
-    you_won_message = "Congratulations! You guessed the sequence '#{@solution.upcase}'"
-    return "Congratulations! You guessed the sequence '#{@solution.upcase}'" if @solution == guess
+    you_won_message = "Congratulations! You guessed the sequence '#{@solution.upcase}'! Do you want to (p)lay again or (q)uit?"
+    if @solution == guess
+      @solution = nil
+      return you_won_message
+    end
+
+    
+
   end
 
   def generate_sequence(this_many)
