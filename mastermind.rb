@@ -25,7 +25,7 @@ What's your guess?"
         when 'i'
           response "If you don't konw how to play already please just hit 'q' and go away"
         when 'p'
-          @solution = generate_sequence(4)
+          @solution = generate_sequence(4).join
           response game_start_text
         when 'c'
           response cheating
@@ -41,7 +41,7 @@ What's your guess?"
     start_game_first_message = "Start the game before trying to cheat, duh"
     return start_game_first_message unless @solution
 
-    solution_message = "Here's the answer cheater [ #{@solution.join} ]"
+    solution_message = "Here's the answer cheater [ #{@solution} ]"
     return solution_message
   end
 
@@ -49,12 +49,12 @@ What's your guess?"
 
   def check_guess(guess)
     guess.downcase!
+
     validation = ValidateGuess.new(guess)
     return validation.message unless validation.valid?
 
-    byebug
-    return "Congratulations! You guessed the sequence '#{@soluction.upcase}'" if @solution == guess
-
+    you_won_message = "Congratulations! You guessed the sequence '#{@solution.upcase}'"
+    return "Congratulations! You guessed the sequence '#{@solution.upcase}'" if @solution == guess
   end
 
   def generate_sequence(this_many)
